@@ -1,16 +1,27 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace P2FixAnAppDotNetCode.Models.Services
 {
     /// <summary>
     /// Provides services method to manage the application language
     /// </summary>
+    /// 
     public class LanguageService : ILanguageService
     {
         /// <summary>
         /// Set the UI language
         /// </summary>
+        /// 
+
+        private readonly ILogger<LanguageService> _logger;
+
+        public LanguageService(ILogger<LanguageService> logger)
+        {
+            _logger = logger;
+        }
+
         public void ChangeUiLanguage(HttpContext context, string language)
         {
             string culture = SetCulture(language);
@@ -23,9 +34,21 @@ namespace P2FixAnAppDotNetCode.Models.Services
         public string SetCulture(string language)
         {
             string culture = "";
-            // TODO complete the code 
-            // Default language is "en", french is "fr" and spanish is "es".
-            
+            _logger.LogInformation("Language change requested: {language}", language);
+
+            switch(language)
+            {
+                case "English":
+                    culture = "en-GB";
+                    break;
+                case "Spanish":
+                    culture = "es-ES";
+                    break;
+                case "French":
+                default:
+                    culture = "fr-FR";
+                    break;
+            }
             return culture;
         }
 
