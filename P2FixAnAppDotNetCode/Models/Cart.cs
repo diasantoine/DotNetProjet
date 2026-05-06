@@ -11,6 +11,9 @@ namespace P2FixAnAppDotNetCode.Models
         /// <summary>
         /// Read-only property for display only
         /// </summary>
+
+        private readonly List<CartLine> _cartLines = new();
+
         public IEnumerable<CartLine> Lines => GetCartLineList();
 
         /// <summary>
@@ -19,7 +22,8 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            return new List<CartLine>();
+            //return new List<CartLine>();
+            return _cartLines;
         }
 
         /// <summary>
@@ -27,7 +31,18 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            // TODO implement the method
+            CartLine line = GetCartLineList().Find(l => l.Product.Id == product.Id);
+            if(line != null)
+            {
+                line.Quantity += quantity;
+            }else
+            {
+                _cartLines.Add(new CartLine
+                {
+                    Product = product,
+                    Quantity = quantity
+                });
+            }
         }
 
         /// <summary>
@@ -41,8 +56,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetTotalValue()
         {
-            // TODO implement the method
-            return 0.0;
+            return GetCartLineList().Sum(l => l.Product.Price * l.Quantity);
         }
 
         /// <summary>
@@ -50,8 +64,15 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetAverageValue()
         {
-            // TODO implement the method
-            return 0.0;
+            if(GetCartLineList().Count == 0) return 0.0;
+
+            double totalValue = GetTotalValue();
+            int totalQuantity = GetCartLineList().Sum(l => l.Quantity);
+            if (totalQuantity == 0)
+            {
+                return 0.0;
+            }
+            return totalValue / totalQuantity;
         }
 
         /// <summary>
@@ -59,8 +80,8 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public Product FindProductInCartLines(int productId)
         {
-            // TODO implement the method
-            return null;
+            CartLine line = GetCartLineList().Find(l => l.Product.Id == productId);
+            return line?.Product;
         }
 
         /// <summary>
