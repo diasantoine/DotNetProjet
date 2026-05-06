@@ -14,14 +14,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// Set the UI language
         /// </summary>
         /// 
-
-        private readonly ILogger<LanguageService> _logger;
-
-        public LanguageService(ILogger<LanguageService> logger)
-        {
-            _logger = logger;
-        }
-
         public void ChangeUiLanguage(HttpContext context, string language)
         {
             string culture = SetCulture(language);
@@ -34,7 +26,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
         public string SetCulture(string language)
         {
             string culture = "";
-            _logger.LogInformation("Language change requested: {language}", language);
 
             switch(language)
             {
