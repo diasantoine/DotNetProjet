@@ -22,7 +22,6 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            //return new List<CartLine>();
             return _cartLines;
         }
 

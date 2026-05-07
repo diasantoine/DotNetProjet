@@ -12,9 +12,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
         private readonly IProductRepository _productRepository;
         private readonly IOrderRepository _orderRepository;
 
-        private readonly ILogger<IProductService> _logger;
-
-
         public ProductService(IProductRepository productRepository, IOrderRepository orderRepository)
         {
             _productRepository = productRepository;
