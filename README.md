@@ -22,6 +22,8 @@ Le navigateur s'ouvre automatiquement sur l'application.
 | `fix/cart` | Implémentation de `AddItem`, `GetTotalValue`, `GetAverageValue` et `FindProductInCartLines` |
 | `fix/order-validation` | Ajout des messages de validation localisés sur le modèle Order et dans le formulaire |
 | `fix/language-service` | Implémentation de `SetCulture` et correction des cultures supportées dans `Startup.cs` |
+| `creation-README` | Ajout du README avec prérequis, instructions de lancement et description des branches |
+| `clean-comments` | Suppression du code commenté inutile et du logger non utilisé dans `ProductService` |
 
 ## Langues supportées
 
